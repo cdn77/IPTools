@@ -14,13 +14,13 @@ PHP Library for manipulating network addresses (IPv4 and IPv6).
 Composer:
 Run in command line:
 ```
-composer require s1lentium/iptools
+composer require cdn77/iptools
 ```
 or put in composer.json:
 ```json
 {
     "require": {
-        "s1lentium/iptools": "*"
+        "cdn77/iptools": "*"
     }
 }
 ```
