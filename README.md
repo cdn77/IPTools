@@ -5,18 +5,9 @@ PHP Library for manipulating network addresses (IPv4 and IPv6).
 [![CI](https://github.com/cdn77/IPTools/actions/workflows/ci.yml/badge.svg)](https://github.com/cdn77/IPTools/actions/workflows/ci.yml)
 
 ## Installation
-Composer:
-Run in command line:
+
 ```
 composer require cdn77/iptools
-```
-or put in composer.json:
-```json
-{
-    "require": {
-        "cdn77/iptools": "*"
-    }
-}
 ```
 
 ## Usage
