@@ -163,7 +163,7 @@ class NetworkTest extends TestCase
         $this->assertCount($expected, Network::parse($data));
     }
 
-    public function getTestParseData(): array
+    public static function getTestParseData(): array
     {
         return [
             ['192.168.0.54/24', '192.168.0.0/24'],
@@ -173,7 +173,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getPrefixData(): array
+    public static function getPrefixData(): array
     {
         return [
             ['24', IP::IP_V4, IP::parse('255.255.255.0')],
@@ -183,7 +183,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getInvalidPrefixData(): array
+    public static function getInvalidPrefixData(): array
     {
         return [
             ['-1', IP::IP_V4],
@@ -193,7 +193,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getHostsData(): array
+    public static function getHostsData(): array
     {
         return [
             [
@@ -210,7 +210,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getExcludeData(): array
+    public static function getExcludeData(): array
     {
         return [
             [
@@ -226,7 +226,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getExcludeExceptionData(): array
+    public static function getExcludeExceptionData(): array
     {
         return [
             ['192.0.2.0/28', '192.0.3.0/24'],
@@ -234,7 +234,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getMoveToData(): array
+    public static function getMoveToData(): array
     {
         return [
             [
@@ -265,7 +265,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getMoveToExceptionData(): array
+    public static function getMoveToExceptionData(): array
     {
         return [
             ['192.168.0.0/22', '22'],
@@ -275,7 +275,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getTestIterationData(): array
+    public static function getTestIterationData(): array
     {
         return [
             [
@@ -307,7 +307,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getTestCountData(): array
+    public static function getTestCountData(): array
     {
         return [
             ['127.0.0.0/31', 2],

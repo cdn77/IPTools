@@ -173,7 +173,7 @@ class IPTest extends TestCase
         $this->assertEquals($expected, $reversePointer);
     }
 
-    public function getTestConstructorExceptionData(): array
+    public static function getTestConstructorExceptionData(): array
     {
         return [
             ['256.0.0.1'],
@@ -187,7 +187,7 @@ class IPTest extends TestCase
         ];
     }
 
-    public function getToStringData(): array
+    public static function getToStringData(): array
     {
         return [
             ['127.0.0.1', '127.0.0.1'],
@@ -197,7 +197,7 @@ class IPTest extends TestCase
         ];
     }
 
-    public function getTestParseData(): array
+    public static function getTestParseData(): array
     {
         return [
             [2130706433, '127.0.0.1'], //long
@@ -209,7 +209,7 @@ class IPTest extends TestCase
         ];
     }
 
-    public function getParseBinData(): array
+    public static function getParseBinData(): array
     {
         return [
             [
@@ -220,7 +220,7 @@ class IPTest extends TestCase
         ];
     }
 
-    public function getTestNextData(): array
+    public static function getTestNextData(): array
     {
         return [
             ['192.168.0.1', 1, '192.168.0.2'],
@@ -232,7 +232,7 @@ class IPTest extends TestCase
         ];
     }
 
-    public function getTestPrevData(): array
+    public static function getTestPrevData(): array
     {
         return [
             ['192.168.1.1', 1, '192.168.1.0'],
@@ -244,7 +244,7 @@ class IPTest extends TestCase
         ];
     }
 
-    public function getReversePointerData(): array
+    public static function getReversePointerData(): array
     {
         return [
             ['192.0.2.5', '5.2.0.192.in-addr.arpa'],
