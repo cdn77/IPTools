@@ -376,7 +376,7 @@ class Network implements \Iterator, \Countable
 	#[ReturnTypeWillChange]
 	public function count()
 	{
-		return (integer)$this->getBlockSize();
+		return (int)$this->getBlockSize();
 	}
 
 }
