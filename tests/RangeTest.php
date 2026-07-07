@@ -3,13 +3,12 @@
 use IPTools\Range;
 use IPTools\Network;
 use IPTools\IP;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class RangeTest extends TestCase
 {
-    /**
-     * @dataProvider getTestParseData
-     */
+    #[DataProvider('getTestParseData')]
     public function testParse($data, $expected): void
     {
         $range = Range::parse($data);
@@ -18,9 +17,7 @@ class RangeTest extends TestCase
         $this->assertEquals($expected[1], $range->lastIP);
     }
 
-    /**
-     * @dataProvider getTestNetworksData
-     */
+    #[DataProvider('getTestNetworksData')]
     public function testGetNetworks($data, $expected): void
     {
         $result = array();
@@ -32,17 +29,13 @@ class RangeTest extends TestCase
         $this->assertEquals($expected, $result);        
     }
 
-    /**
-     * @dataProvider getTestContainsData
-     */
+    #[DataProvider('getTestContainsData')]
     public function testContains($data, $find, $expected): void
     {
         $this->assertEquals($expected, Range::parse($data)->contains(new IP($find)));
     }
 
-    /**
-     * @dataProvider getTestIterationData
-     */
+    #[DataProvider('getTestIterationData')]
     public function testRangeIteration($data, $expected): void
     {
         foreach (Range::parse($data) as $key => $ip) {
@@ -52,15 +45,13 @@ class RangeTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /**
-     * @dataProvider getTestCountData
-     */
+    #[DataProvider('getTestCountData')]
     public function testCount($data, $expected): void
     {
         $this->assertEquals($expected, count(Range::parse($data)));
     }
 
-    public function getTestParseData(): array
+    public static function getTestParseData(): array
     {
         return [
             ['127.0.0.1-127.255.255.255', ['127.0.0.1', '127.255.255.255']],
@@ -70,7 +61,7 @@ class RangeTest extends TestCase
         ];
     }
 
-    public function getTestNetworksData(): array
+    public static function getTestNetworksData(): array
     {
         return [
             ['192.168.1.*', ['192.168.1.0/24']],
@@ -95,7 +86,7 @@ class RangeTest extends TestCase
         ];
     }
 
-    public function getTestContainsData(): array
+    public static function getTestContainsData(): array
     {
         return [
             ['192.168.*.*', '192.168.245.15', true],
@@ -112,7 +103,7 @@ class RangeTest extends TestCase
         ];
     }
 
-    public function getTestIterationData(): array
+    public static function getTestIterationData(): array
     {
         return [
             [
@@ -144,7 +135,7 @@ class RangeTest extends TestCase
         ];
     }
 
-    public function getTestCountData(): array
+    public static function getTestCountData(): array
     {
         return [
             ['127.0.0.0/31', 2],
