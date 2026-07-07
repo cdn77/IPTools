@@ -2,6 +2,7 @@
 
 use IPTools\Network;
 use IPTools\IP;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class NetworkTest extends TestCase
@@ -34,9 +35,7 @@ class NetworkTest extends TestCase
         $this->assertEquals('192.0.0.255', (string)$network->lastIP);
     }
 
-    /**
-     * @dataProvider getTestParseData
-     */
+    #[DataProvider('getTestParseData')]
     public function testParse($data, $expected): void
     {
         $this->assertEquals($expected, (string)Network::parse($data));
@@ -50,9 +49,7 @@ class NetworkTest extends TestCase
         Network::parse('10.0.0.0/24 abc');
     }
 
-    /**
-     * @dataProvider getPrefixData
-     */
+    #[DataProvider('getPrefixData')]
     public function testPrefix2Mask($prefix, $version, $mask): void
     {
         $this->assertEquals($mask, Network::prefix2netmask($prefix, $version));
@@ -66,9 +63,7 @@ class NetworkTest extends TestCase
         Network::prefix2netmask('128', 'ip_version');
     }
 
-    /**
-     * @dataProvider getInvalidPrefixData
-     */
+    #[DataProvider('getInvalidPrefixData')]
     public function testPrefix2MaskInvalidPrefix($prefix, $version): void
     {
         $this->expectException(\Exception::class);
@@ -77,9 +72,7 @@ class NetworkTest extends TestCase
         Network::prefix2netmask($prefix, $version);
     }
 
-    /**
-     * @dataProvider getHostsData
-     */
+    #[DataProvider('getHostsData')]
     public function testHosts($data, $expected): void
     {
         $result = [];
@@ -91,9 +84,7 @@ class NetworkTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /**
-     * @dataProvider getExcludeData
-     */
+    #[DataProvider('getExcludeData')]
     public function testExclude($data, $exclude, $expected): void
     {
         $result = array();
@@ -105,9 +96,7 @@ class NetworkTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /**
-     * @dataProvider getExcludeExceptionData
-     */
+    #[DataProvider('getExcludeExceptionData')]
     public function testExcludeException($data, $exclude): void
     {
         $this->expectException(\Exception::class);
@@ -116,9 +105,7 @@ class NetworkTest extends TestCase
         Network::parse($data)->exclude($exclude);
     }
 
-    /**
-     * @dataProvider getMoveToData
-     */
+    #[DataProvider('getMoveToData')]
     public function testMoveTo($network, $prefixLength, $expected): void
     {
         $result = array();
@@ -130,9 +117,7 @@ class NetworkTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /**
-     * @dataProvider getMoveToExceptionData
-     */
+    #[DataProvider('getMoveToExceptionData')]
     public function testMoveToException($network, $prefixLength): void
     {
         $this->expectException(\Exception::class);
@@ -141,9 +126,7 @@ class NetworkTest extends TestCase
         Network::parse($network)->moveTo($prefixLength);
     }
 
-     /**
-     * @dataProvider getTestIterationData
-     */
+    #[DataProvider('getTestIterationData')]
     public function testNetworkIteration($data, $expected): void
     {
         $result = [];
@@ -155,15 +138,13 @@ class NetworkTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-     /**
-     * @dataProvider getTestCountData
-     */
+    #[DataProvider('getTestCountData')]
     public function testCount($data, $expected): void
     {
         $this->assertCount($expected, Network::parse($data));
     }
 
-    public function getTestParseData(): array
+    public static function getTestParseData(): array
     {
         return [
             ['192.168.0.54/24', '192.168.0.0/24'],
@@ -173,7 +154,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getPrefixData(): array
+    public static function getPrefixData(): array
     {
         return [
             ['24', IP::IP_V4, IP::parse('255.255.255.0')],
@@ -183,7 +164,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getInvalidPrefixData(): array
+    public static function getInvalidPrefixData(): array
     {
         return [
             ['-1', IP::IP_V4],
@@ -193,7 +174,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getHostsData(): array
+    public static function getHostsData(): array
     {
         return [
             [
@@ -210,7 +191,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getExcludeData(): array
+    public static function getExcludeData(): array
     {
         return [
             [
@@ -226,7 +207,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getExcludeExceptionData(): array
+    public static function getExcludeExceptionData(): array
     {
         return [
             ['192.0.2.0/28', '192.0.3.0/24'],
@@ -234,7 +215,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getMoveToData(): array
+    public static function getMoveToData(): array
     {
         return [
             [
@@ -265,7 +246,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getMoveToExceptionData(): array
+    public static function getMoveToExceptionData(): array
     {
         return [
             ['192.168.0.0/22', '22'],
@@ -275,7 +256,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getTestIterationData(): array
+    public static function getTestIterationData(): array
     {
         return [
             [
@@ -307,7 +288,7 @@ class NetworkTest extends TestCase
         ];
     }
 
-    public function getTestCountData(): array
+    public static function getTestCountData(): array
     {
         return [
             ['127.0.0.0/31', 2],
