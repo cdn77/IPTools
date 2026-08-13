@@ -49,6 +49,7 @@ class Network implements \Iterator, \Countable
 	 * @param string $data
 	 * @return Network
 	 * @throws IpException
+	 * @throws NetworkException
 	 */
 	public static function parse(string $data)
 	{
