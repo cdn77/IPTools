@@ -48,7 +48,7 @@ jobs:
           path: "coverage.xml"
 
   upload_coverage:
-    name: "Upload coverage to Coveralls"
+    name: "Upload coverage to Codecov"
     runs-on: "ubuntu-24.04"
     needs:
       - "phpunit"
@@ -64,5 +64,9 @@ jobs:
         with:
           path: "reports"
 
-      - name: "Upload to Coveralls"
-        uses: coverallsapp/github-action@v2
+      - name: "Upload to Codecov"
+        uses: "codecov/codecov-action@v7"
+        env:
+          CODECOV_TOKEN: "${{ secrets.CODECOV_TOKEN }}"
+        with:
+          directory: "reports"
